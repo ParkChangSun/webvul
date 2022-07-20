@@ -10,7 +10,9 @@ if($_GET['page'] == "login"){
     }
     $db = dbconnect();
     $query = "select id,pw from member where id='{$input['id']}'";
-    $result = mysqli_fetch_array(mysqli_query($db,$query));
+    $query = htmlentities($query);
+    $_query = mysql_real_escape_string($query);
+    $result = mysqli_fetch_array(mysqli_query($db,$_query));
     if($result['id'] && $result['pw'] == $input['pw']){
         $_SESSION['id'] = $result['id'];
         exit("<script>alert(`login ok`);location.href=`/`;</script>");
