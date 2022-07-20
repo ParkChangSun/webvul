@@ -32,6 +32,7 @@ if($_GET['page'] == "join"){
     $result = mysqli_fetch_array(mysqli_query($db,$query));
     if(!$result['id']){
         $query = "insert into member values('{$input['id']}','{$input['email']}','{$input['pw']}','user')";
+        htmlentities($query);
         mysqli_query($db,$query);
         exit("<script>alert(`join ok`);location.href=`/`;</script>");
     }
