@@ -33,7 +33,8 @@ if($_GET['page'] == "join"){
     if(!$result['id']){
         $query = "insert into member values('{$input['id']}','{$input['email']}','{$input['pw']}','user')";
         htmlentities($query);
-        mysqli_query($db,$query);
+        $_query = mysql_real_escape_string($query);
+        mysqli_query($db,$_query);
         exit("<script>alert(`join ok`);location.href=`/`;</script>");
     }
     else{
