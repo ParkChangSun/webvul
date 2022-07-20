@@ -29,10 +29,12 @@ if($_GET['page'] == "join"){
     if(strlen($input['email']) > 120) exit("<script>alert(`email too long`);history.go(-1);</script>");
     if(!filter_var($input['email'],FILTER_VALIDATE_EMAIL)) exit("<script>alert(`wrong email`);history.go(-1);</script>");
     $query = "select id from member where id='{$input['id']}'";
-    $result = mysqli_fetch_array(mysqli_query($db,$query));
+    $query = htmlentities($query);
+    $_query = mysql_real_escape_string($query);
+    $result = mysqli_fetch_array(mysqli_query($db,$_query));
     if(!$result['id']){
         $query = "insert into member values('{$input['id']}','{$input['email']}','{$input['pw']}','user')";
-        htmlentities($query);
+        $query = htmlentities($query);
         $_query = mysql_real_escape_string($query);
         mysqli_query($db,$_query);
         exit("<script>alert(`join ok`);location.href=`/`;</script>");
