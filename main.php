@@ -60,7 +60,7 @@ if($_GET['page'] == "upload"){
     }
 }
 if($_GET['page'] == "download"){
-    $content = file_get_contents("./upload/{$_GET['file']}");
+    $content = file_get_contents(realpath("./upload/{$_GET['file']}"));
     if(!$content){
         exit("<script>alert(`not exists file`);history.go(-1);</script>");
     }
@@ -74,8 +74,7 @@ if($_GET['page'] == "admin"){
     $db = dbconnect();
     $result = mysqli_fetch_array(mysqli_query($db,"select id from member where id='{$_SESSION['id']}'"));
     if($result['id'] == "admin"){
-        //echo file_get_contents("/flag"); // do not remove it.
-        echo htmlentities(file_get_contents("/flag")); // do not remove it.
+        echo file_get_contents("/flag"); // do not remove it.
     }
     else{
         exit("<script>alert(`admin only`);history.go(-1);</script>");
