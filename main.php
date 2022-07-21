@@ -60,7 +60,8 @@ if($_GET['page'] == "upload"){
     }
 }
 if($_GET['page'] == "download"){
-    $content = file_get_contents(realpath("./upload/{$_GET['file']}"));
+    $file = basename($_GET['file']);
+    $content = file_get_contents(realpath("./upload/{$file}"));
     if(!$content){
         exit("<script>alert(`not exists file`);history.go(-1);</script>");
     }
